@@ -19,8 +19,6 @@ module.exports = (req, res) => {
     fs.readFile(homePageHtml, 'utf8', (err, data) => {
       if (err) console.error(err)
 
-      // TODO: handle responses
-
       let pageHeading = 'Home'
       let pageTemplate = pageGen(data)
       let pageContent = '' // TODO: Display top 6 articles, based on views

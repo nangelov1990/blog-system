@@ -1,5 +1,8 @@
 'use strict'
-module.exports = {
+let coutner = 0
+module.exports.articleCounter = coutner
+module.exports.articleObject = {
+  'id': coutner,
   'title': '',
   'description': '',
   'totalViews': 0,
