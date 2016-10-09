@@ -43,6 +43,7 @@ module.exports = (req, res) => {
           .sort((a, b) => {
             return new Date(a.views) - new Date(b.views)
           })
+          .slice(0, 6)
         sortedArticles.forEach((article) => {
           articleList += articleStart +
             article.id +

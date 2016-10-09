@@ -1,6 +1,6 @@
 'use strict'
-var url = require('url')
-var fs = require('fs')
+let url = require('url')
+let fs = require('fs')
 
 let pageGen = require('../helpers/pageTemplGenerator')
 let responsesHelper = require('../helpers/responses').responses

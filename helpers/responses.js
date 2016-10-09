@@ -7,7 +7,8 @@ module.exports.types = {
 module.exports.responses = {
   ok,
   notFound,
-  redirected
+  redirected,
+  forbidden
 }
 
 function ok (res, data, type) {
@@ -21,6 +22,14 @@ function notFound (res, data, type, err) {
 
 function redirected (res, locationHeader) {
   plain(res, null, null, 302, locationHeader)
+}
+
+function forbidden (res, data, type) {
+  plain(res, data, type, 403)
+}
+
+function unsupported (res, data, type) {
+  plain(res, data, type, 415)
 }
 
 function plain (res, data, type, code, additionalHeaders) {

@@ -50,7 +50,7 @@ module.exports = (req, res) => {
           part.on('data', (data) => { file += data })
           part.on('end', () => {
             let randomazer = Math.round(Math.random() * 100000)
-            savedFilename = `${part.filename}_${randomazer}`
+            savedFilename = `${randomazer}_${part.filename}`
             fs.writeFile(`./images/${savedFilename}`, file) // TODO: handle clashing filenames
           })
         } else {

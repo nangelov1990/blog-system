@@ -8,6 +8,8 @@ let createPage = require('./create')
 let listAll = require('./list-all')
 let details = require('./details')
 let postComment = require('./post-comment')
+let staticFiles = require('./static-files')
+let stats = require('./stats')
 
 module.exports.handlers = [
   favicon,
@@ -15,5 +17,7 @@ module.exports.handlers = [
   createPage,
   listAll,
   postComment,
-  details
+  details,
+  stats,
+  staticFiles
 ]
