@@ -7,33 +7,31 @@ let responsesHelper = require('../helpers/responses').responses
 let responseType = require('../helpers/responses').types
 
 let homePageHtml = './content/partials/index.html'
+let createPageHtml = './content/partials/create.html'
 
-let homePageUrl = '/'
-let homePageMethod = 'GET'
+let createPageUrl = '/create'
+let createPageGet = 'GET'
+let createPagePost = 'POST'
 
 module.exports = (req, res) => {
   req.pathname = req.pathname || url.parse(req.url).pathname
 
-  if (req.pathname === homePageUrl &&
-      req.method === homePageMethod) {
-    fs.readFile(homePageHtml, 'utf8', (err, data) => {
-      if (err) console.error(err)
+  if (req.pathname === createPageUrl) {
+    let pageHeading = 'Add new article'
+    let pageTemplate = pageGen(fs.readFileSync(homePageHtml, 'utf8'))
 
-      // TODO: handle responses
-
-      let pageHeading = 'Home'
-      let pageTemplate = pageGen(data)
-      let pageContent = '' // TODO: Display top 6 articles, based on views
+    if (req.method === createPageGet) {
+      let createForm = fs.readFileSync(createPageHtml, 'utf8')
 
       let html = pageTemplate.header +
         pageHeading +
         pageTemplate.menu +
-        pageContent +
+        createForm +
         pageTemplate.footer
 
       responsesHelper.ok(res, html, responseType.html)
-    })
+    }
   } else {
-    return true // handler cannot support request
+    return true // handler does not support request
   }
 }

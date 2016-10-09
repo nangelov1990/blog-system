@@ -8,8 +8,8 @@ module.exports = (data) => {
   let pageFooter = pageHtml[2]
 
   return {
-    pageHeader,
-    pageMenu,
-    pageFooter
+    'header': pageHeader,
+    'menu': pageMenu,
+    'footer': pageFooter
   }
 }
