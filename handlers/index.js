@@ -5,10 +5,12 @@ let favicon = require('./favicon')
 let homePage = require('./home-page')
 let createPage = require('./create')
 let listAll = require('./list-all')
+let details = require('./details')
 
 module.exports.handlers = [
   favicon,
   homePage,
   createPage,
-  listAll
+  listAll,
+  details
 ]

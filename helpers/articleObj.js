@@ -6,7 +6,7 @@ function article (title, description, imageName) {
   this.id = counter
   this.title = ''
   this.description = ''
-  this.totalViews = 0
+  this.views = 0
   this.comments = []
   this.imageName = ''
   this.deleted = false
