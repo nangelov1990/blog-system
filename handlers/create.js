@@ -39,7 +39,7 @@ module.exports = (req, res) => {
     } else if (req.method === createPagePost) {
       let title = ''
       let desc = ''
-      let filename = ''
+      let savedFilename = ''
 
       let form = new multiparty.Form()
       form.parse(req)
@@ -49,8 +49,9 @@ module.exports = (req, res) => {
           part.setEncoding = 'binary'
           part.on('data', (data) => { file += data })
           part.on('end', () => {
-            fs.writeFile(`./images/${part.filename}`, file) // TODO: handle clashing filenames
-            filename = part.filename
+            let randomazer = Math.round(Math.random() * 100000)
+            savedFilename = `${part.filename}_${randomazer}`
+            fs.writeFile(`./images/${savedFilename}`, file) // TODO: handle clashing filenames
           })
         } else {
           let body = ''
@@ -69,15 +70,10 @@ module.exports = (req, res) => {
         }
       })
       form.on('close', () => {
-        let newArticle = new Article(title, desc, filename)
-        newArticle.id = articles.length
-        newArticle.title = title
-        newArticle.description = desc
-        newArticle.imageName = filename
+        let id = articles.length
+        let newArticle = new Article(id, title, desc, savedFilename)
 
         articles.push(newArticle)
-        console.log(articles) // TODO: remove temporary memory state view
-        articleCounter++
 
         let createdMessage = '<h2>Article added</h2>'
         let html = pageTemplate.header +

@@ -28,6 +28,7 @@ module.exports = (req, res) => {
     let html = ''
 
     if (article) {
+      ++article.views
       let detailsView = fs.readFileSync(detailsPageHtml, 'utf8').split('#')
       // article view
       let detailsTop = detailsView[0]

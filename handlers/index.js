@@ -1,4 +1,5 @@
 'use strict'
+// module.exports.db = require('../content/db')
 module.exports.db = require('../content/mock-db')
 
 let favicon = require('./favicon')
