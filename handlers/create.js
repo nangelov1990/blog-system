@@ -7,9 +7,9 @@ let pageGen = require('../helpers/pageTemplGenerator')
 let responsesHelper = require('../helpers/responses').responses
 let responseType = require('../helpers/responses').types
 
-let articles = require('../content/db')
+let articles = require('./index').db
 
-let article = require('../helpers/articleObj').articleObject
+let Article = require('../helpers/articleObj').articleObject
 let articleCounter = require('../helpers/articleObj').articleCounter
 
 let homePageHtml = './content/partials/index.html'
@@ -34,7 +34,7 @@ module.exports = (req, res) => {
         pageTemplate.menu +
         createForm +
         pageTemplate.footer
-        
+
       responsesHelper.ok(res, html, responseType.html)
     } else if (req.method === createPagePost) {
       let title = ''
@@ -57,7 +57,6 @@ module.exports = (req, res) => {
 
           part.setEncoding('utf8')
           part.on('data', (data) => {
-            console.log(data)
             body += data
           })
           part.on('end', () => {
@@ -70,15 +69,15 @@ module.exports = (req, res) => {
         }
       })
       form.on('close', () => {
-        article.title = title
-        article.description = desc
-        article.imageName = filename
+        let newArticle = new Article(title, desc, filename)
+        newArticle.id = articles.length
+        newArticle.title = title
+        newArticle.description = desc
+        newArticle.imageName = filename
 
-        articles.push(article)
-        console.log(articleCounter)
+        articles.push(newArticle)
+        console.log(articles) // TODO: remove temporary memory state view
         articleCounter++
-        console.log(articles)
-        console.log(articleCounter)
 
         let createdMessage = '<h2>Article added</h2>'
         let html = pageTemplate.header +
@@ -86,7 +85,7 @@ module.exports = (req, res) => {
           pageTemplate.menu +
           createdMessage +
           pageTemplate.footer
-        
+
         responsesHelper.ok(res, html, responseType.html)
       })
     }

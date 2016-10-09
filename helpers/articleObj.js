@@ -1,12 +1,14 @@
 'use strict'
-let coutner = 0
-module.exports.articleCounter = coutner
-module.exports.articleObject = {
-  'id': coutner,
-  'title': '',
-  'description': '',
-  'totalViews': 0,
-  'comments': [],
-  'imageName': '',
-  'dateCreated': new Date().toLocaleString()
+let counter = 0
+module.exports.articleCounter = counter
+module.exports.articleObject = article
+function article (title, description, imageName) {
+  this.id = counter
+  this.title = ''
+  this.description = ''
+  this.totalViews = 0
+  this.comments = []
+  this.imageName = ''
+  this.deleted = false
+  this.dateCreated = new Date().toLocaleString()
 }
