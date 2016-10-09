@@ -2,11 +2,12 @@
 module.exports = [
   {
     'id': 0,
-    'title': 'zero',
-    'description': '400 views, 10/9/2016, 1:12:57 PM',
+    'title': 'turbo',
+    'description': `Ever wonder how they decided to stick that big honking turbo on that little engine. “Hey bro, you’ve got a bit of engine stuck on your turbo, there.” Turns out there’s some science to it!
+In a previous article we discussed the basics of how to turbocharge your vehicle. We mentioned that we’d go in detail about how to select and to read compressor maps. Well. Get your shhhtuff together! We’re about to dive right in!`,
     'views': 400,
     'comments': [],
-    'imageName': '',
+    'imageName': '93474_turbo.jpg',
     'deleted': false,
     'dateCreated': '10/9/2016, 1:12:57 PM'
   },

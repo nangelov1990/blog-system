@@ -24,26 +24,26 @@ module.exports = (req, res) => {
   let filepath = '.' + req.pathname
 
   fs.readFile(filepath, (err, data) => {
+    let contentType = getContentType(filepath)
+
     if (err) {
       console.error(err)
+
+      if (!contentType) {
+        console.error('Non-supported file format requested.')
+
+        let html = genPage('UNSUPPORTED MEDIA TYPE')
+
+        responsesHelper.unsupported(res, html, responseType.html)
+
+        return true
+      }
 
       let html = genPage('File not found')
 
       responsesHelper.notFound(res, html, responseType.html)
 
       return true // handler does not support request
-    }
-
-    let contentType = getContentType(filepath)
-
-    if (!contentType) {
-      console.error('Non-supported file format requested.')
-
-      let html = genPage('UNSUPPORTED MEDIA TYPE')
-
-      responsesHelper.unsupported(res, html, responseType.html)
-
-      return true
     }
 
     responsesHelper.ok(res, data, contentType)

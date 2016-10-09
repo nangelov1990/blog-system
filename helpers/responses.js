@@ -8,7 +8,8 @@ module.exports.responses = {
   ok,
   notFound,
   redirected,
-  forbidden
+  forbidden,
+  unsupported
 }
 
 function ok (res, data, type) {

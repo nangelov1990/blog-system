@@ -10,7 +10,6 @@ let responseType = require('../helpers/responses').types
 let articles = require('./index').db
 
 let Article = require('../helpers/articleObj').articleObject
-let articleCounter = require('../helpers/articleObj').articleCounter
 
 let homePageHtml = './content/partials/index.html'
 let createPageHtml = './content/partials/create.html'
@@ -51,7 +50,8 @@ module.exports = (req, res) => {
           part.on('end', () => {
             let randomazer = Math.round(Math.random() * 100000)
             savedFilename = `${randomazer}_${part.filename}`
-            fs.writeFile(`./images/${savedFilename}`, file) // TODO: handle clashing filenames
+            let imageBuffer = decodeBase64Image(file)
+            fs.writeFile(`./images/${savedFilename}`, imageBuffer)
           })
         } else {
           let body = ''
@@ -88,4 +88,18 @@ module.exports = (req, res) => {
   } else {
     return true // handler does not support request
   }
+}
+
+function decodeBase64Image(dataString) {
+  let matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)
+  let response = {}
+
+  if (matches.length !== 3) {
+    return new Error('Invalid input string')
+  }
+
+  response.type = matches[1]
+  response.data = new Buffer(matches[2], 'base64')
+
+  return response
 }
