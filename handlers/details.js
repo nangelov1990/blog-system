@@ -23,7 +23,7 @@ module.exports = (req, res) => {
     let itemPos = articles.map((x) => x.id).indexOf(index)
     let article = articles[itemPos]
 
-    let pageHeading = 'TODO Details'
+    let pageHeading = 'Article details'
     let pageTemplate = pageGen(fs.readFileSync(homePageHtml, 'utf8'))
     let html = ''
 
