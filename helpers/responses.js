@@ -1,6 +1,7 @@
 'use strict'
 module.exports.types = {
-  'html': 'text/html'
+  'html': 'text/html',
+  'favicon': 'image/x-icon'
 }
 
 module.exports.responses = {
