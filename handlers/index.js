@@ -6,11 +6,13 @@ let homePage = require('./home-page')
 let createPage = require('./create')
 let listAll = require('./list-all')
 let details = require('./details')
+let postComment = require('./post-comment')
 
 module.exports.handlers = [
   favicon,
   homePage,
   createPage,
   listAll,
+  postComment,
   details
 ]

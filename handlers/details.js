@@ -78,7 +78,10 @@ module.exports = (req, res) => {
       if (article.comments.length > 0) {
         articleDetails += '<h3>Comments</h3><ul>'
         article.comments.forEach((comment) => {
-          articleDetails += `<li><span>${comment.text}</span></li>`
+          articleDetails += `<li><ul>
+            <li>USER: <span>${comment.username}</span></li>
+            <li>COMMENT: <span>${comment.text}</span></li>
+          </ul></li>`
         })
         articleDetails += '</ul>'
       }

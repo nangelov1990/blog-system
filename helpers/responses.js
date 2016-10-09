@@ -19,8 +19,8 @@ function notFound (res, data, type, err) {
   plain(res, data, type, 404)
 }
 
-function redirected (res, data, type, locationHeader) {
-  plain(res, data, type, 302, locationHeader)
+function redirected (res, locationHeader) {
+  plain(res, null, null, 302, locationHeader)
 }
 
 function plain (res, data, type, code, additionalHeaders) {
@@ -30,11 +30,11 @@ function plain (res, data, type, code, additionalHeaders) {
   }
   data ? headers['Content-Length'] = data.length : null
   type ? headers['Content-Type'] = type : null
-  additionalHeaders
-    ? additionalHeaders.forEach((header) => {
-      headers[header] = additionalHeaders.header
-    })
-    : null
+  if (additionalHeaders) {
+    for (let header in additionalHeaders) {
+      headers[header] = additionalHeaders[header]
+    }
+  }
 
   res.writeHead(code, headers)
   data ? res.write(data) : null
